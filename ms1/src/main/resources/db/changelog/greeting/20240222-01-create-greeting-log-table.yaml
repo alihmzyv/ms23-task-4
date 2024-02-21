@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20240222-01
+      author: ali.hamzayev
+      changes:
+        - createTable:
+            schemaName: public
+            tableName: greeting_log
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                  autoIncrement: true
+              - column:
+                  name: occurred_at
+                  type: timestamp
+                  defaultValueComputed: now()

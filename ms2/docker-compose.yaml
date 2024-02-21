@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  postgres:
+    image: "postgres"
+    ports:
+      - ${DB_PORT:-54330}:5432
+    environment:
+      POSTGRES_USER: ${DB_USER:-root}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-psswrd}
+      POSTGRES_DB: greeting_db
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+volumes:
+  database-data:
