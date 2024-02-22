@@ -5,6 +5,7 @@ plugins {
 
 subprojects {
     apply from: '../gradle/jib.gradle'
+    tasks.jib.dependsOn('assemble')
 }
 
 group = 'com.alihmzyv'
