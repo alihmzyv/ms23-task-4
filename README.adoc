@@ -1,13 +1,15 @@
 === Pushing all subprojects and running the application
 
-Pushing all subprojects and run the application using this command:
+Clean, build and push all subprojects and run the application using this command:
 
 ```
 MS23_DOCKER_REGISTRY=your_docker_registry MS23_DOCKER_REGISTRY_USERNAME=your_docker_registry_username MS23_DOCKER_REGISTRY_PASSWORD="your_docker_registry_password" ./gradlew composeUp
 ```
 
-Warning: the docker registry should have 2 repositories, named ms1 and ms2. You can use the command with my test docker hub registry credentials:
+Warning: the docker registry should have 2 repositories, named ms1 and ms2. You can use the command with the credentials of my public test docker hub registry which has those repositories:
+```
 MS23_DOCKER_REGISTRY=ms23test MS23_DOCKER_REGISTRY_USERNAME=ms23test MS23_DOCKER_REGISTRY_PASSWORD="ms123456$" ./gradlew composeUp
+```
 
 === Using the application
 
