@@ -35,8 +35,15 @@ tasks.register('composeUp', Exec) {
             def imageVersion = it.version
             environment(imageVersionEnvVar, imageVersion)
         }
+        commandLine 'docker', 'compose', 'up'
     }
-    commandLine 'docker', 'compose', 'up'
+}
+
+tasks.register('composeDown', Exec) {
+    workingDir project.rootDir
+    doFirst {
+        commandLine 'docker', 'compose', 'down'
+    }
 }
 
 test {

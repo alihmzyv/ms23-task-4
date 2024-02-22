@@ -15,7 +15,11 @@ jib {
     }
     to {
         image = "${dockerRegistry}/${project.name}:${project.version}"
-        auth.setUsername(dockerRegistryUsername)
-        auth.setPassword(dockerRegistryPassword)
+        if (dockerRegistryUsername != null) {
+            auth.setUsername(dockerRegistryUsername)
+        }
+        if (dockerRegistryPassword != null) {
+            auth.setPassword(dockerRegistryPassword)
+        }
     }
 }
