@@ -36,6 +36,7 @@ tasks.register('composeUp', Exec) {
             environment(imageVersionEnvVar, imageVersion)
         }
     }
+    commandLine 'docker', 'compose', 'up'
 }
 
 test {
