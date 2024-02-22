@@ -4,9 +4,9 @@ def hash = 'git rev-parse --short HEAD'.execute().text.trim()
 version = "${projectVersion}.$hash"
 
 ext {
-    dockerRegistry = System.getenv("MS23_DOCKER_REGISTRY") ?: "alihmzyv"
-    dockerRegistryUsername = System.getenv("MS23_DOCKER_REGISTRY_USERNAME") ?: ''
-    dockerRegistryPassword = System.getenv("MS23_DOCKER_REGISTRY_PASSWORD") ?: ''
+    dockerRegistry = System.getenv("MS23_DOCKER_REGISTRY")
+    dockerRegistryUsername = System.getenv("MS23_DOCKER_REGISTRY_USERNAME")
+    dockerRegistryPassword = System.getenv("MS23_DOCKER_REGISTRY_PASSWORD")
 }
 
 jib {
@@ -14,15 +14,8 @@ jib {
         image = 'openjdk:17-jdk-slim'
     }
     to {
-        image = "${dockerRegistry}/${project.name}"
-        project.afterEvaluate {
-            tags = [project.version.toString(), "latest"]
-        }
-        if (dockerRegistryUsername != null) {
-            auth.setUsername(dockerRegistryUsername)
-        }
-        if (dockerRegistryPassword != null) {
-            auth.setPassword(dockerRegistryPassword)
-        }
+        image = "${dockerRegistry}/${project.name}:${project.version}"
+        auth.setUsername(dockerRegistryUsername)
+        auth.setPassword(dockerRegistryPassword)
     }
 }
