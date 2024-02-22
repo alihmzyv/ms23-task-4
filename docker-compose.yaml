@@ -17,7 +17,7 @@ services:
     volumes:
       - db2-data:/var/lib/postgresql/data/
   ms1:
-    image: alihmzyv/ms1
+    image: alihmzyv/ms1:${MS1_VERSION:-latest}
     environment:
       DB_PORT: 5432
       DB_IP: db1
@@ -28,7 +28,7 @@ services:
     depends_on:
       - db1
   ms2:
-    image: alihmzyv/ms2
+    image: alihmzyv/ms2:${MS2_VERSION:-latest}
     environment:
         DB_PORT: 5432
         DB_IP: db2

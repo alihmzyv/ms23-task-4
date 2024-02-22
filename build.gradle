@@ -19,6 +19,25 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
+tasks.register('buildAndPushAllSubProjects', Exec) {
+    workingDir project.rootDir
+    doFirst {
+        commandLine 'sh', './gradlew', 'jib'
+    }
+}
+
+tasks.register('composeUp', Exec) {
+    workingDir project.rootDir
+    dependsOn 'buildAndPushAllSubProjects'
+    doFirst {
+        subprojects.forEach {
+            def imageVersionEnvVar = it.name.concat('_').concat('version').toUpperCase()
+            def imageVersion = it.version
+            environment(imageVersionEnvVar, imageVersion)
+        }
+    }
+}
+
 test {
     useJUnitPlatform()
 }
