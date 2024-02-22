@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+  db1:
+    image: "postgres"
+    environment:
+      POSTGRES_USER: ${DB_USER:-root}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-psswrd}
+      POSTGRES_DB: greeting_db
+    volumes:
+      - db1-data:/var/lib/postgresql/data/
+  db2:
+    image: "postgres"
+    environment:
+      POSTGRES_USER: ${DB_USER:-root}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-psswrd}
+      POSTGRES_DB: greeting_db
+    volumes:
+      - db2-data:/var/lib/postgresql/data/
+  ms1:
+    image: alihmzyv/ms1
+    environment:
+      DB_PORT: 5432
+      DB_IP: db1
+      DB_USERNAME: root
+      DB_PASSWORD: psswrd
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db1
+  ms2:
+    image: alihmzyv/ms2
+    environment:
+        DB_PORT: 5432
+        DB_IP: db2
+        DB_USERNAME: root
+        DB_PASSWORD: psswrd
+    ports:
+      - "8090:8090"
+    depends_on:
+      - db2
+  reverse_proxy:
+    restart: always
+    image: nginx
+    container_name: reverse_proxy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - ms1
+      - ms2
+volumes:
+  db1-data:
+  db2-data:
