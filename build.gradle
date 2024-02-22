@@ -30,6 +30,7 @@ tasks.register('composeUp', Exec) {
     workingDir project.rootDir
     dependsOn 'buildAndPushAllSubProjects'
     doFirst {
+        environment('dockerRegistry', System.getenv("MS23_DOCKER_REGISTRY"))
         subprojects.forEach {
             def imageVersionEnvVar = it.name.concat('_').concat('version').toUpperCase()
             def imageVersion = it.version
