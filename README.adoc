@@ -12,9 +12,9 @@
 ```
 
 
-=== Building and pushing images of all subprojects and running the application
+=== Building and pushing docker images of all subprojects and running the application
 
-Build and push images of all subprojects and run the application using this command:
+Build and push docker images of all subprojects and run the application using this command:
 
 ```
 ./gradlew composeUp
@@ -31,5 +31,5 @@ Build and push images of all subprojects and run the application using this comm
 Stop the application using this command:
 
 ```
-./gradlew :composeDown
+./gradlew composeDown
 ```
