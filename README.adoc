@@ -1,18 +1,26 @@
-=== Pushing all subprojects and running the application
-
-Clean, build and push all subprojects and run the application using this command:
+=== Build a docker image for a submodule and push using this command:
 
 ```
-MS23_DOCKER_REGISTRY=your_docker_registry MS23_DOCKER_REGISTRY_USERNAME=your_docker_registry_username MS23_DOCKER_REGISTRY_PASSWORD="your_docker_registry_password" ./gradlew composeUp
+./gradlew :submodule:jib
 ```
 
-Warning: the docker registry should have 2 repositories, named ms1 and ms2. You can use the command with the credentials of my public test docker hub registry which has those repositories:
+
+=== Build docker images for all submodules and push using this command:
+
 ```
-MS23_DOCKER_REGISTRY=ms23test MS23_DOCKER_REGISTRY_USERNAME=ms23test MS23_DOCKER_REGISTRY_PASSWORD="ms123456$" ./gradlew composeUp
+./gradlew jib
+```
+
+
+=== Building and pushing images of all subprojects and running the application
+
+Build and push images of all subprojects and run the application using this command:
+
+```
+./gradlew composeUp
 ```
 
 === Using the application
-
 
 * MS1 hello - `http://localhost:8000/ms1/hello`
 * MS2 hello - `http://localhost:8000/ms2/hello`

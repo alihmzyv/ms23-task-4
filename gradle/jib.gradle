@@ -4,9 +4,9 @@ def hash = 'git rev-parse --short HEAD'.execute().text.trim()
 version = "${projectVersion}.$hash"
 
 ext {
-    dockerRegistry = System.getenv("MS23_DOCKER_REGISTRY")
-    dockerRegistryUsername = System.getenv("MS23_DOCKER_REGISTRY_USERNAME")
-    dockerRegistryPassword = System.getenv("MS23_DOCKER_REGISTRY_PASSWORD")
+    dockerRegistry = System.getenv("MS23_DOCKER_REGISTRY") ?: 'ms23test'
+    dockerRegistryUsername = System.getenv("MS23_DOCKER_REGISTRY_USERNAME") ?: 'ms23test'
+    dockerRegistryPassword = System.getenv("MS23_DOCKER_REGISTRY_PASSWORD") ?: 'ms123456$'
 }
 
 jib {
